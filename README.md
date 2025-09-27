@@ -15,9 +15,9 @@ A cutting-edge Virtual Try-On application that enables real-time augmented reali
 
 ### Core Functionality
 - **Real-time Face Tracking**: Advanced WebAR.rocks neural network-based face detection
-- **3D Model Overlay**: Seamless integration of GLTF 3D models with live camera feed
-- **Multi-Category Support**: Glasses and hat try-on with category-specific tracking
-- **Custom Model Upload**: Support for uploading custom GLB/GLTF 3D models
+- **3D Model Overlay**: Seamless integration of GLB 3D models with live camera feed
+- **Single-Category Usage**: Try on glasses or hats individually (not simultaneously)
+- **Custom Model Upload**: Support for uploading custom GLB 3D models
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 
 ### Technical Highlights
@@ -62,7 +62,7 @@ A cutting-edge Virtual Try-On application that enables real-time augmented reali
 - **Three.js 0.172.0**: 3D graphics library and WebGL wrapper
 - **React Three Fiber 8.18.0**: React renderer for Three.js
 - **WebAR.rocks.face**: Advanced face tracking and AR capabilities
-- **GLTF Loader**: 3D model loading with Draco compression support
+- **GLB Loader**: 3D model loading with Draco compression support
 
 ### Post-Processing & Effects
 - **@react-three/postprocessing 2.19.1**: Visual effects pipeline
@@ -120,8 +120,10 @@ The application requires camera access for face tracking. When prompted:
 1. **Launch Application**: Navigate to the application URL
 2. **Grant Camera Access**: Allow browser camera permissions
 3. **Wait for Initialization**: WebAR system loads neural networks
-4. **Select Product**: Choose from glasses or hat categories
+4. **Select Product**: Choose from glasses or hat categories (one type at a time)
 5. **Try On**: 3D model overlays on detected face in real-time
+
+**Important**: You can try on either glasses or hats, but not both simultaneously. Switch between categories as needed.
 
 ![Glasses Try-On](./img/test_2.png)
 *Virtual glasses try-on with real-time face tracking*
@@ -136,10 +138,9 @@ The application requires camera access for face tracking. When prompted:
 3. **Wait for Processing**: Model loads and validates
 4. **Try On**: Uploaded model appears in product list
 
-### Supported File Formats
-- **GLB**: Binary GLTF format (recommended)
-- **GLTF**: Text-based format with external assets
-- **Textures**: PNG, JPG, WebP formats
+### Supported File Format
+- **GLB Only**: Binary GLB format (required)
+- **Note**: Only GLB files are supported for model upload
 - **Compression**: Draco geometry compression supported
 
 ## Architecture Overview
@@ -164,7 +165,7 @@ src/
 ```
 Camera Input → WebAR Face Detection → Three.js Rendering → Canvas Display
                                    ↓
-              GLTF Model Loading ← Product Selection Interface
+              GLB Model Loading ← Product Selection Interface
 ```
 
 ### WebAR Integration
@@ -300,7 +301,7 @@ npm run build
 - Ensure stable internet connection for neural network loading
 
 **3D Model Issues**
-- Verify GLB file format and integrity
+- Verify GLB file format and integrity (only GLB format supported)
 - Check model scale and positioning
 - Ensure textures are embedded in GLB file
 - Validate file size is under upload limit
