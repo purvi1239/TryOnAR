@@ -535,172 +535,29 @@ This CI/CD pipeline ensures reliable, secure, and efficient delivery of the Virt
 
 ## Cost Optimization Strategy
 
-### Storage Lifecycle Management
+  Storage Lifecycle
 
-**Current Implementation Analysis:**
-Based on the existing codebase, the project already implements several cost-effective storage practices:
+  -  set GLB files size in minimum threshold
+  -  Already Auto-cleanup temporary URLs
 
-**GLB File Size Optimization:**
-- Set minimum threshold for 3D model file sizes
-- Automatic compression using Draco geometry compression
-- Texture optimization with WebP format
-- LOD (Level of Detail) models for different quality levels
+  GPU Usage Strategy
 
-**Auto-cleanup Implementation:**
-- Temporary URLs for uploaded models are automatically revoked
-- Browser cache management for 3D assets
-- Efficient memory cleanup in WebAR processing
+  - Runs on CPU only (WebAR.rocks)
+  - Already use Three.js settings already implemented
 
-**Storage Lifecycle Policies:**
-- **Hot Storage (0-30 days)**: Frequently accessed models on CDN
-- **Warm Storage (30-90 days)**: Less frequent models on standard storage
-- **Cold Storage (90+ days)**: Archive old models with retrieval delays
-- **Deletion Policy**: Remove unused models after 1 year
+  CDN & Caching
 
-### GPU Usage Strategy
+  - Deploy to Vercel (free) - automatic CDN
+  - Static files = cheap hosting
+  - Browser caching for 3D models
 
-**Current CPU-Only Architecture:**
-The existing implementation is already optimized for cost efficiency:
+  Monitoring (Optional)
 
-**WebAR.rocks CPU Processing:**
-- Runs entirely on client-side CPU
-- No server-side GPU costs
-- Efficient neural network inference on device
-- Optimized for mobile and desktop browsers
+  - Add simple FPS counter
+  - Basic memory usage tracking
+  - Google Analytics (free)
+  - Error logging to console
 
-**Three.js Optimization Settings:**
-- Hardware-accelerated WebGL rendering
-- Efficient shader compilation and caching
-- Optimized geometry and texture processing
-- Adaptive quality based on device capabilities
-
-**Cost Benefits:**
-- Zero server-side GPU costs
-- Scales with user devices automatically
-- No cloud GPU instance management
-- Reduced infrastructure complexity
-
-### CDN & Caching Strategy
-
-**Deployment Optimization:**
-- **Vercel Deployment**: Automatic global CDN distribution
-- **Static File Hosting**: Cost-effective for 3D assets
-- **Edge Caching**: Reduced bandwidth costs
-- **Compression**: Gzip/Brotli for all assets
-
-**Browser Caching Implementation:**
-```javascript
-// Cache headers for 3D models
-Cache-Control: public, max-age=31536000, immutable
-// Cache headers for application code
-Cache-Control: public, max-age=86400, must-revalidate
-```
-
-**CDN Cost Optimization:**
-- **Smart Caching**: Cache 3D models for 1 year
-- **Bandwidth Optimization**: Compressed asset delivery
-- **Regional Distribution**: Serve from nearest edge location
-- **Cache Hit Ratio**: Target 95%+ for static assets
-
-### Monitoring & Alerting Strategy
-
-**Basic Performance Monitoring:**
-```javascript
-// FPS Counter Implementation
-const fpsCounter = {
-  frames: 0,
-  lastTime: performance.now(),
-
-  update() {
-    this.frames++;
-    const currentTime = performance.now();
-    if (currentTime - this.lastTime >= 1000) {
-      const fps = this.frames;
-      console.log(`FPS: ${fps}`);
-      this.frames = 0;
-      this.lastTime = currentTime;
-    }
-  }
-};
-```
-
-**Memory Usage Tracking:**
-```javascript
-// Memory monitoring for WebAR
-const memoryMonitor = {
-  track() {
-    if (performance.memory) {
-      const memory = {
-        used: Math.round(performance.memory.usedJSHeapSize / 1048576),
-        total: Math.round(performance.memory.totalJSHeapSize / 1048576),
-        limit: Math.round(performance.memory.jsHeapSizeLimit / 1048576)
-      };
-      console.log('Memory Usage (MB):', memory);
-    }
-  }
-};
-```
-
-**Analytics Integration:**
-- **Google Analytics**: Free user behavior tracking
-- **Error Logging**: Console-based error collection
-- **Performance Metrics**: Core Web Vitals monitoring
-- **Conversion Tracking**: Try-on to purchase funnel
-
-### Auto-scaling Strategy
-
-**Client-Side Scaling Benefits:**
-The current architecture provides inherent cost advantages:
-
-**Device-Based Scaling:**
-- Application scales with user devices automatically
-- No server infrastructure scaling costs
-- Performance adapts to device capabilities
-- Zero scaling configuration required
-
-**Cost Efficiency:**
-- No server instances to manage
-- No auto-scaling group costs
-- No load balancer expenses
-- No database scaling fees
-
-**Performance Optimization:**
-```javascript
-// Adaptive quality based on device performance
-const adaptiveQuality = {
-  getQualityLevel() {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl');
-    const renderer = gl.getParameter(gl.RENDERER);
-
-    // Detect device capabilities
-    if (renderer.includes('Mali') || renderer.includes('Adreno')) {
-      return 'mobile'; // Lower quality for mobile GPUs
-    }
-    return 'desktop'; // Higher quality for desktop
-  }
-};
-```
-
-### Cost Monitoring Dashboard
-
-**Key Metrics to Track:**
-- CDN bandwidth usage and costs
-- Storage consumption by file type
-- User session duration and engagement
-- Model loading success rates
-- Device performance distribution
-
-**Cost Alerts:**
-- CDN bandwidth exceeding monthly budget
-- Storage growth rate above threshold
-- Performance degradation on specific devices
-- Error rate spikes requiring investigation
-
-**Optimization Recommendations:**
-- Regular 3D model compression audits
-- Cache hit ratio improvements
-- Device-specific performance tuning
-- User experience optimization based on analytics
-
-This cost optimization strategy ensures the Virtual Try-On platform remains economically viable while delivering high-quality user experiences across all device types and usage patterns.
+  Auto-scaling Strategy (Optional)
+  - Client-side app = scales with users' devices
+  - No server = no scaling cost
