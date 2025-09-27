@@ -1,20 +1,15 @@
-FROM node:20-alpine AS builder
-ENV NODE_ENV=development
+FROM node:20-alpine
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+COPY package*.json ./
+RUN npm ci --only=production --no-audit --no-fund && \
+    npm cache clean --force
 
-# Copy source and build
 COPY . .
-RUN npm run build
+RUN npm run build && \
+    rm -rf node_modules && \
+    npm ci --only=production --no-audit --no-fund
 
-# Production stage: serve static files with Nginx
-FROM nginx:1.27-alpine AS runner
-COPY --from=builder /app/dist /usr/share/nginx/html
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \ 
- && ln -sf /dev/stderr /var/log/nginx/error.log
-
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+CMD ["npm", "run", "preview"]
 

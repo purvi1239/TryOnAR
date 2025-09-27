@@ -36,7 +36,7 @@ A cutting-edge Virtual Try-On application that enables real-time augmented reali
 ## Application Screenshots
 
 ### Main Interface
-![Application Interface](./img/test_1.png)
+![Application Interface](./img/test_3.png)
 *Clean, modern interface with camera view and control panels*
 
 ### Glasses Try-On Feature
@@ -44,7 +44,7 @@ A cutting-edge Virtual Try-On application that enables real-time augmented reali
 *Real-time glasses overlay with accurate face tracking*
 
 ### Hat Try-On Feature
-![Hat Demo](./img/test_3.png)
+![Hat Demo](./img/test_1.png)
 *Virtual hat try-on with 3D model positioning*
 
 ### Complete Workflow
@@ -110,7 +110,7 @@ The application requires camera access for face tracking. When prompted:
 2. Ensure good lighting for optimal face detection
 3. Position face within the camera frame
 
-![Camera Setup](./img/test_1.png)
+![Camera Setup](./img/test_3.png)
 *Application interface with camera setup and face tracking*
 
 ## Usage Guide
@@ -126,7 +126,7 @@ The application requires camera access for face tracking. When prompted:
 ![Glasses Try-On](./img/test_2.png)
 *Virtual glasses try-on with real-time face tracking*
 
-![Hat Try-On](./img/test_3.png)
+![Hat Try-On](./img/test_1.png)
 *Virtual hat try-on demonstration*
 
 ### Custom Model Upload
