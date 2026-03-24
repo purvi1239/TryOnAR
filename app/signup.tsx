@@ -1,4 +1,4 @@
-// app/signup.tsx
+
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
@@ -31,7 +31,7 @@ export default function SignUpScreen() {
           value={email}
           onChangeText={setEmail}
           placeholderTextColor="#9CA3AF"
-          selectionColor={COLORS.primary}
+          selectionColor={'#00E5FF'}
           keyboardType="email-address"
         />
 
@@ -42,7 +42,7 @@ export default function SignUpScreen() {
           onChangeText={setPassword}
           secureTextEntry
           placeholderTextColor="#9CA3AF"
-          selectionColor={COLORS.primary}
+          selectionColor={'#00E5FF'}
         />
 
         <TouchableOpacity style={styles.button} onPress={handleSignUp}>
@@ -60,68 +60,54 @@ export default function SignUpScreen() {
   );
 }
 
-// --- Color Palette ---
-const COLORS = {
-  primary: '#4F46E5',
-  background: '#F5F7FB',
-  text: '#1E1E2F',
-  accent: '#A5B4FC',
-};
 
-// --- Styles ---
+
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: '#0a0a0a',
     justifyContent: 'center',
     padding: 30,
   },
   title: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: COLORS.primary,
+    color: '#F5F7FB',
     textAlign: 'center',
     marginBottom: 10,
   },
   input: {
-    backgroundColor: COLORS.background,
+    backgroundColor: '#0a0a0a',
     padding: 18,
     borderRadius: 15,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: COLORS.accent,
-    color: COLORS.text,
-    shadowColor: COLORS.accent,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 2,
+    borderColor: '#00E5FF',
+    color: '#FFFFFF',
+    
   },
   button: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: '#00E5FF',
     paddingVertical: 18,
     borderRadius: 15,
     alignItems: 'center',
     marginTop: 10,
-    shadowColor: COLORS.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 5,
+    
   },
   buttonText: {
-    color: COLORS.background,
+    color: '#F5F7FB',
     fontSize: 20,
     fontWeight: 'bold',
   },
   footerText: {
     textAlign: 'center',
     marginTop: 25,
-    color: COLORS.text,
+    color: '#F5F7FB',
     fontSize: 14,
   },
   loginText: {
-    color: COLORS.primary,
+    color:  '#00E5FF',
     fontWeight: 'bold',
   },
 });
