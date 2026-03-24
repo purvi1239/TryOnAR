@@ -1,3 +1,4 @@
+
 import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   loading: {
     position: 'absolute',
     bottom: 40,
-    fontSize: 12,
+    fontSize: 20,
     color: '#666',
     letterSpacing: 4,
   },
