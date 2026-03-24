@@ -1,4 +1,5 @@
-import { useRouter } from 'expo-router';
+
+   import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -26,7 +27,7 @@ export default function LoginScreen() {
         value={email}
         onChangeText={setEmail}
         placeholderTextColor="#9CA3AF"
-        selectionColor={COLORS.primary}
+        selectionColor={'#00E5FF'}
       />
 
       <TextInput
@@ -36,7 +37,7 @@ export default function LoginScreen() {
         onChangeText={setPassword}
         secureTextEntry
         placeholderTextColor="#9CA3AF"
-        selectionColor={COLORS.primary}
+        selectionColor={'#00E5FF'}
       />
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
@@ -57,25 +58,19 @@ export default function LoginScreen() {
   );
 }
 
-const COLORS = {
-  primary: '#4F46E5',
-  background: '#F5F7FB',
-  text: '#1E1E2F',
-  accent: '#A5B4FC',
-  white: '#FFFFFF',
-};
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: '#0a0a0a',
     justifyContent: 'center',
     padding: 25,
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: '#FFFFFF',
     textAlign: 'center',
   },
   subtitle: {
@@ -85,34 +80,34 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   input: {
-    backgroundColor: COLORS.white,
+    backgroundColor:'#0a0a0a',
     padding: 15,
     borderRadius: 12,
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: COLORS.accent,
-    color: COLORS.text,
+    borderColor:'#00E5FF',
+    color: '#FFFFFF',
   },
   button: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: '#00E5FF',
     padding: 15,
     borderRadius: 12,
     alignItems: 'center',
     marginTop: 10,
   },
   buttonText: {
-    color: COLORS.white,
+    color: '#FFFFFF',
     fontSize: 18,
     fontWeight: 'bold',
   },
   footerText: {
     textAlign: 'center',
     marginTop: 25,
-    color: COLORS.text,
+    color: '#FFFFFF',
     fontSize: 14,
   },
   signupText: {
-    color: COLORS.primary,
+    color:'#00E5FF',
     fontWeight: 'bold',
   },
 });
