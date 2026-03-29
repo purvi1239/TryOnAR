@@ -150,8 +150,9 @@ async function drawglasses(faces){
             let pointNoseBottom = face.scaledMesh[ glassesKeyPoints.noseBottom ];
             let pointrightEye = face.scaledMesh[ glassesKeyPoints.rightEye ];
 
-            glasses.position.x = pointMidEye[ 0 ];
-            glasses.position.y = -pointMidEye[ 1 ] + parseFloat(selectedglasses.attr("data-3d-up"));
+            glasses.position.x = pointMidEye[ 0 ]+15;
+            // Start by adding + 50 to see a dramatic jump
+            glasses.position.y = -pointMidEye[ 1 ] + parseFloat(selectedglasses.attr("data-3d-up")) + 240;
             glasses.position.z = -camera.position.z + pointMidEye[ 2 ];
 
             glasses.up.x = pointMidEye[ 0 ] - pointNoseBottom[ 0 ];
@@ -173,6 +174,12 @@ async function drawglasses(faces){
 
             glasses.rotation.y = Math.PI;
             glasses.rotation.z = Math.PI / 2 - Math.acos( glasses.up.x );
+            
+            // Grab your custom tilt from the HTML (default to 0 if it doesn't exist)
+            let customTilt = parseFloat(selectedglasses.attr("data-rotate-x")) || 0;
+
+            // Force the 3D engine to tilt the glasses on the X-axis
+            glasses.rotation.x = customTilt;
             
             renderer.render(scene, camera);
         }

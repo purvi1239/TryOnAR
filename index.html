@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Virtual Glasses Try-On</title>
+    <title>AR GLASSES TRY ON </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel='stylesheet' type='text/css' media='screen' href='https://unpkg.com/webcam-easy/demo/style/webcam-demo.css'>
@@ -16,6 +16,14 @@
     <script src="https://unpkg.com/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <script type="text/javascript" src="js/webcam-ui-lib.js"></script>
+    <script type="importmap">
+  {
+    "imports": {
+      "three": "./node_modules/three/build/three.module.js",
+      "three/addons/": "./node_modules/three/examples/jsm/"
+    }
+  }
+</script>
 </head>
 <body>
     <main id="virtual-glasses-app">
@@ -36,6 +44,7 @@
                     <span class="sr-only"></span>
                 </div>
             </div>
+            <div class="face-guide"></div>
 
             <div id="glasses-slider">
                 <img id="arrowLeft" src="images/arrow-left.png">
@@ -49,17 +58,19 @@
                                                              data-3d-y="0.5"
                                                              data-3d-z="0"
                                                              data-3d-up="10"
-                                                             data-3d-scale="0.01">
+                                                             data-3d-scale="0.01"
+                                                             data-rotate-x="-0.5">
                         </li>                       
                         <li >
                             <img src="3dmodel/glasses-02/glasses_02.png" data-3d-type="gltf" 
                                                              data-3d-model-path="3dmodel/glasses-02/"
                                                              data-3d-model="scene.gltf"
-                                                             data-3d-x="0"
-                                                             data-3d-y="0.3"
+                                                             data-3d-x="80"
+                                                             data-3d-y="-80"
                                                              data-3d-z="0"
-                                                             data-3d-up="0"
-                                                             data-3d-scale="0.4">
+                                                             data-3d-up="-5"
+                                                             data-3d-scale="0.4"
+                                                             data-rotate-x="-0.5">
                         </li>
                         <li >
                             <img src="3dmodel/glasses-03/glasses_03.png" data-3d-type="gltf" 
@@ -69,37 +80,42 @@
                                                              data-3d-y="0.3"
                                                              data-3d-z="0"
                                                              data-3d-up="-40"
-                                                             data-3d-scale="0.4">
+                                                             data-3d-scale="0.4"
+                                                             data-rotate-x="-0.5">
                         </li>
                         <li>
-                            <img src="3dmodel/glasses-04/glasses_04.png" data-3d-type="gltf" 
+                             <img src="3dmodel/glasses-04/glasses_04.png" data-3d-type="gltf" 
                                                             data-3d-model-path="3dmodel/glasses-04/"
                                                             data-3d-model="scene.gltf"
                                                             data-3d-x="0"
                                                             data-3d-y="0.5"
                                                             data-3d-z="0"
                                                             data-3d-up="0"
-                                                            data-3d-scale="12">
+                                                            data-3d-scale="10"
+                                                            data-rotate-x="-0.4">
                         </li>
                         <li >
                             <img src="3dmodel/glasses-05/glasses_05.png" data-3d-type="gltf" 
                                                              data-3d-model-path="3dmodel/glasses-05/"
                                                              data-3d-model="scene.gltf"
                                                              data-3d-x="0"
-                                                             data-3d-y="0"
+                                                             data-3d-y="80"
                                                              data-3d-z="0"
                                                              data-3d-up="-80"
-                                                             data-3d-scale="0.11">
+                                                             data-3d-scale="0.09"
+                                                             data-rotate-x="-0.5">
                         </li>
                         <li >
-                            <img src="3dmodel/glasses-06/glasses_06.png" data-3d-type="gltf" 
+                           <img src="3dmodel/glasses-06/glasses_06.png" data-3d-type="gltf" 
                                                              data-3d-model-path="3dmodel/glasses-06/"
                                                              data-3d-model="scene.gltf"
                                                              data-3d-x="0"
                                                              data-3d-y="0.3"
                                                              data-3d-z="0"
                                                              data-3d-up="-30"
-                                                             data-3d-scale="0.1">
+                                                             data-3d-scale="0.1"
+                                                             data-rotate-x="-0.4"
+                                                             data-3d-up="10">
                         </li>
                         <li >
                             <img src="3dmodel/glasses-07/glasses_07.png" data-3d-type="gltf" 

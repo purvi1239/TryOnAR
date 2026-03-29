@@ -267,3 +267,20 @@
     left: 0;
     right: 0;
 }
+
+/* Centers the guide and makes it a dashed oval */
+.face-guide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* This perfectly centers it */
+    width: 250px;      /* Adjust this to make it wider/narrower */
+    height: 350px;     /* Adjust this to make it taller/shorter */
+    border: 5px dashed #00FFCC; /* The teal dashed line */
+    border-radius: 50%; /* This is what turns the square box into an oval */
+    opacity: 0.7;       /* Makes it slightly transparent so it isn't distracting */
+    
+    /* CRITICAL: This ensures the box doesn't block you from clicking the canvas underneath it */
+    pointer-events: none; 
+    z-index: 100;       /* Forces it to sit on top of the video feed */
+}

@@ -1,0 +1,24 @@
+{
+  "name": "virtual-glasses-try-on",
+  "version": "1.0.0",
+  "description": "Implementation of virtual glasses using Three.js + TensorFlow.js + Facemesh model.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bensonruan/Virtual-Glasses-Try-on.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bensonruan/Virtual-Glasses-Try-on/issues"
+  },
+  "homepage": "https://github.com/bensonruan/Virtual-Glasses-Try-on#readme",
+  "dependencies": {
+    "three": "^0.183.2"
+  }
+}
