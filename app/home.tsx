@@ -1,4 +1,4 @@
-// app/(tabs)/home.tsx
+// app/home.tsx
 import React from 'react';
 import { Text, View } from 'react-native';
 
