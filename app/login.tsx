@@ -1,3 +1,4 @@
+
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import React, { useEffect, useRef, useState } from 'react';
@@ -38,6 +39,7 @@ export default function LoginScreen() {
         <View style={styles.overlay} />
       </View>
 
+
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.contentContainer}
@@ -55,6 +57,9 @@ export default function LoginScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
         />
+
+     
+      
 
         <TextInput
           style={styles.input}
@@ -89,10 +94,12 @@ export default function LoginScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0a0a0a',
+
   },
   backgroundAnimation: {
     width: '100%',
@@ -105,6 +112,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+
+
     justifyContent: 'center',
     padding: 25,
   },
@@ -129,16 +138,20 @@ const styles = StyleSheet.create({
     textShadowRadius: 15,
   },
   input: {
+
     backgroundColor: 'rgba(20, 20, 20, 0.7)', 
+
     padding: 15,
     borderRadius: 12,
     marginBottom: 15,
     borderWidth: 1,
+
     borderColor: '#9966CC',
     color: '#FFFFFF',
   },
   button: {
     backgroundColor: '#9966CC',
+
     padding: 15,
     borderRadius: 12,
     alignItems: 'center',
@@ -162,7 +175,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   signupText: {
+
     color: '#9966CC',
+
     fontWeight: 'bold',
   },
 });

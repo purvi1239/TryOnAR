@@ -18,6 +18,7 @@ export default function SignUpScreen() {
   };
 
   return (
+
     <View style={{ flex: 1, backgroundColor: '#0a0a0a' }}>
       
       <View style={StyleSheet.absoluteFillObject}>
@@ -27,9 +28,11 @@ export default function SignUpScreen() {
           loop
           style={styles.backgroundAnimation}
           resizeMode="cover"
+
         />
         <View style={styles.overlay} />
       </View>
+
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -58,6 +61,7 @@ export default function SignUpScreen() {
             selectionColor={'#9966CC'}
           />
 
+
           <TouchableOpacity style={styles.button} onPress={handleSignUp}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
@@ -74,9 +78,11 @@ export default function SignUpScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+
     justifyContent: 'center',
     padding: 30,
   },
@@ -100,25 +106,31 @@ const styles = StyleSheet.create({
     textShadowRadius: 15,
   },
   input: {
+
     backgroundColor: 'rgba(20, 20, 20, 0.7)', 
+
     padding: 18,
     borderRadius: 15,
     marginBottom: 20,
     borderWidth: 1,
+
     borderColor: '#9966CC',
     color: '#FFFFFF',
   },
   button: {
     backgroundColor: '#9966CC',
+
     paddingVertical: 18,
     borderRadius: 15,
     alignItems: 'center',
     marginTop: 10,
+
     elevation: 5,
     shadowColor: '#9966CC',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
+
   },
   buttonText: {
     color: '#F5F7FB',
@@ -132,7 +144,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   loginText: {
+
     color: '#9966CC',
+
     fontWeight: 'bold',
   },
 });

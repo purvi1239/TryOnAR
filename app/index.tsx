@@ -1,3 +1,4 @@
+
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import React, { useEffect, useRef } from 'react';
@@ -27,7 +28,7 @@ export default function Index() {
 
     
     const timer = setTimeout(() => {
-      router.replace("/onboarding1" as never);
+
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -95,4 +96,54 @@ export default function Index() {
       </Animated.Text>
     </View>
   );
+
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0a0a0a', 
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  welcome: {
+    position: 'absolute',
+    top: 60,
+    fontSize: 22,
+    color: '#888',
+    letterSpacing: 3,
+  },
+  centerContent: {
+    alignItems: 'center',
+  },
+  appName: {
+    fontSize: 26,
+    color: '#fff',
+    fontWeight: '700',
+    letterSpacing: 1.5,
+  },
+  highlight: {
+    color: '#00E5FF', 
+  },
+  divider: {
+    height: 1,
+    width: 120,
+    backgroundColor: '#222',
+    marginVertical: 20,
+  },
+  tagline: {
+    fontSize: 14,
+    color: '#aaa',
+    textAlign: 'center',
+    paddingHorizontal: 40,
+    lineHeight: 20,
+  },
+  loading: {
+    position: 'absolute',
+    bottom: 40,
+    fontSize: 20,
+    color: '#666',
+    letterSpacing: 4,
+  },
+});
+
