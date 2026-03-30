@@ -15,7 +15,7 @@ export default function Onboarding1() {
     
       <View style={styles.animationContainer}>
         <LottieView
-          source={require("../assets/animations /sparkles.json")} // ✅ fixed path
+          source={require("../assets/animations/sparkles.json")} // ✅ fixed path
           autoPlay
           loop
           style={styles.animation}

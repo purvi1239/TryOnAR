@@ -17,7 +17,7 @@ export default function Onboarding2() {
 
         
         <LottieView
-          source={require("../assets/animations /onboarding2_eye.json")}
+          source={require("../assets/animations/onboarding2_eye.json")}
           autoPlay
           loop
           style={styles.eye}
@@ -25,7 +25,7 @@ export default function Onboarding2() {
 
         
         <LottieView
-          source={require("../assets/animations /hud_circle.json")}
+          source={require("../assets/animations/hud_circle.json")}
           autoPlay
           loop
           speed={0.6}

@@ -29,7 +29,7 @@ export default function LoginScreen() {
       <View style={StyleSheet.absoluteFillObject}>
         <LottieView
           ref={animationRef}
-          source={require('../assets/animations /scan-ring.json')} 
+          source={require('../assets/animations/scan-ring.json')} 
           autoPlay
           loop
           style={styles.backgroundAnimation}

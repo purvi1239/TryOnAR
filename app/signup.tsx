@@ -23,7 +23,7 @@ export default function SignUpScreen() {
       
       <View style={StyleSheet.absoluteFillObject}>
         <LottieView
-          source={require('../assets/animations /scan-ring.json')}
+          source={require('../assets/animations/scan-ring.json')}
           autoPlay
           loop
           style={styles.backgroundAnimation}

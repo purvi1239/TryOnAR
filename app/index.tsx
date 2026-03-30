@@ -54,7 +54,7 @@ export default function Index() {
       >
         
         <LottieView
-          source={require('../assets/animations /scan-ring.json')}
+          source={require('../assets/animations/scan-ring.json')}
           autoPlay
           loop
           style={{
@@ -67,7 +67,7 @@ export default function Index() {
 
       
         <LottieView
-          source={require('../assets/animations /face-scan.json')}
+          source={require('../assets/animations/face-scan.json')}
           autoPlay
           loop={false}
           style={{
