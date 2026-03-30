@@ -27,7 +27,7 @@ export default function Index() {
 
     
     const timer = setTimeout(() => {
-      router.replace('/onboarding1');
+      router.replace("/onboarding1" as never);
     }, 5000);
 
     return () => clearTimeout(timer);
