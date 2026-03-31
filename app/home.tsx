@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
@@ -11,7 +11,7 @@ export default function HomeScreen() {
     // router.push('/try-lens') etc.
 
     if (option === 'DIRECT TRYONS') {
-      router.push('/ecommerce');
+      router.push('/Ecommerce');
     }
 
   };
