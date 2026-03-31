@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import React, { useEffect, useRef } from 'react';
 import { Animated, StatusBar, View } from 'react-native';
-
+import { StyleSheet } from 'react-native';
 export default function Index() {
   const router = useRouter();
 
@@ -28,7 +28,7 @@ export default function Index() {
 
     
     const timer = setTimeout(() => {
-
+      router.push('/login');
     }, 5000);
 
     return () => clearTimeout(timer);
