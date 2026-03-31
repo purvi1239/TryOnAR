@@ -1,10 +1,8 @@
-
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import React, { useState } from 'react';
 import {
   Alert,
-  Animated,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -15,76 +13,24 @@ import {
   View
 } from 'react-native';
 
-// 🔥 Floating Input Component
-const FloatingInput = ({ label, value, onChangeText, secureTextEntry, keyboardType }: any) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const animatedValue = useState(new Animated.Value(value ? 1 : 0))[0];
-
-  const handleFocus = () => {
-    setIsFocused(true);
-    Animated.timing(animatedValue, {
-      toValue: 1,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-    if (!value) {
-      Animated.timing(animatedValue, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: false,
-      }).start();
-    }
-  };
-
-  const labelStyle = {
-    position: 'absolute' as const,
-    left: 15,
-    top: animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [18, -10],
-    }),
-    fontSize: animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [16, 12],
-    }),
-    color: '#9966CC',
-  };
-
-  return (
-    <View style={{ marginBottom: 25 }}>
-      <Animated.Text style={labelStyle}>{label}</Animated.Text>
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        style={[
-          styles.input,
-          isFocused && styles.inputFocused
-        ]}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      />
-    </View>
-  );
-};
-
 export default function SignUpScreen() {
   const router = useRouter();
 
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [college, setCollege] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState(''); // optional
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignUp = () => {
-    if (!name || !gender || !college || !email || !password) {
+    if (
+      name.trim() === '' ||
+      gender.trim() === '' ||
+      college.trim() === '' ||
+      email.trim() === '' ||
+      password.trim() === ''
+    ) {
       Alert.alert('Error', 'Please fill all required fields');
     } else {
       router.replace('/home');
@@ -93,13 +39,14 @@ export default function SignUpScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#0a0a0a' }}>
-
+      
       <View style={StyleSheet.absoluteFillObject}>
         <LottieView
           source={require('../assets/animations /scan-ring.json')}
           autoPlay
           loop
           style={styles.backgroundAnimation}
+          resizeMode="cover"
         />
         <View style={styles.overlay} />
       </View>
@@ -109,10 +56,17 @@ export default function SignUpScreen() {
         style={{ flex: 1 }}
       >
         <ScrollView contentContainerStyle={styles.container}>
-
+          
           <Text style={styles.title}>Sign Up</Text>
 
-          <FloatingInput label="Full Name" value={name} onChangeText={setName} />
+          {/* Name */}
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            value={name}
+            onChangeText={setName}
+            placeholderTextColor="#9CA3AF"
+          />
 
           {/* Gender */}
           <View style={styles.genderContainer}>
@@ -130,17 +84,57 @@ export default function SignUpScreen() {
             ))}
           </View>
 
-          <FloatingInput label="College" value={college} onChangeText={setCollege} />
+          {/* College */}
+          <TextInput
+            style={styles.input}
+            placeholder="College Name"
+            value={college}
+            onChangeText={setCollege}
+            placeholderTextColor="#9CA3AF"
+          />
 
-          <FloatingInput label="Phone (Optional)" value={phone} onChangeText={setPhone} keyboardType="phone-pad" />
+          {/* Phone (Optional) */}
+          <TextInput
+            style={styles.input}
+            placeholder="Phone Number (Optional)"
+            value={phone}
+            onChangeText={setPhone}
+            placeholderTextColor="#9CA3AF"
+            keyboardType="phone-pad"
+          />
 
-          <FloatingInput label="Email" value={email} onChangeText={setEmail} keyboardType="email-address" />
+          {/* Email */}
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Email"
+            value={email}
+            onChangeText={setEmail}
+            placeholderTextColor="#9CA3AF"
+            keyboardType="email-address"
+          />
 
-          <FloatingInput label="Password" value={password} onChangeText={setPassword} secureTextEntry />
+          {/* Password */}
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            placeholderTextColor="#9CA3AF"
+          />
 
+          {/* Button */}
           <TouchableOpacity style={styles.button} onPress={handleSignUp}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
+
+          {/* Footer */}
+          <Text style={styles.footerText}>
+            Already have an account?{' '}
+            <Text style={styles.loginText} onPress={() => router.push('/login')}>
+              Login
+            </Text>
+          </Text>
 
         </ScrollView>
       </KeyboardAvoidingView>
@@ -161,7 +155,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(10,10,10,0.2)',
+    backgroundColor: 'rgba(10, 10, 10, 0.2)',
   },
   title: {
     fontSize: 36,
@@ -170,28 +164,24 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 30,
     textShadowColor: '#9966CC',
+    textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 15,
   },
   input: {
-    backgroundColor: 'rgba(20,20,20,0.7)',
+    backgroundColor: 'rgba(20, 20, 20, 0.7)',
     padding: 18,
     borderRadius: 15,
+    marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#444',
-    color: '#fff',
-  },
-  inputFocused: {
     borderColor: '#9966CC',
-    shadowColor: '#9966CC',
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
-    elevation: 8,
+    color: '#FFFFFF',
   },
 
+  // Gender styles
   genderContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 25,
+    marginBottom: 20,
   },
   genderBtn: {
     flex: 1,
@@ -207,7 +197,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#9966CC',
   },
   genderText: {
-    color: '#fff',
+    color: '#F5F7FB',
     fontWeight: '600',
   },
 
@@ -217,10 +207,25 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: 'center',
     marginTop: 10,
+    elevation: 5,
+    shadowColor: '#9966CC',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   buttonText: {
-    color: '#fff',
+    color: '#F5F7FB',
     fontSize: 20,
+    fontWeight: 'bold',
+  },
+  footerText: {
+    textAlign: 'center',
+    marginTop: 25,
+    color: '#F5F7FB',
+    fontSize: 14,
+  },
+  loginText: {
+    color: '#9966CC',
     fontWeight: 'bold',
   },
 });
