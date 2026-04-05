@@ -20,6 +20,7 @@ import mirrorHelper from '../contrib/WebARRocksFace/helpers/WebARRocksMirror.js'
 // import 3D models of sunglasses
 import GLTFModel1 from '../../assets/VTOGlasses/models3D/glasses1.glb'
 import GLTFModel2 from '../../assets/VTOGlasses/models3D/glasses2.glb'
+import GLTFModel3 from '../../assets/VTOGlasses/models3D/glasses3.glb'
 
 // import occluder
 import GLTFOccluderModel from '../../assets/VTOGlasses/models3D/occluder.glb'
@@ -342,6 +343,8 @@ const VTOGlasses = (props) => {
           }}>
             <VTOButton onClick={setModel.bind(null, GLTFModel1)}>Classic Glasses</VTOButton>
             <VTOButton onClick={setModel.bind(null, GLTFModel2)}>Modern Glasses</VTOButton>
+            <VTOButton onClick={setModel.bind(null, GLTFModel3)}>Eyeglasses Specs</VTOButton>
+            {/* <VTOButton onClick={setModel.bind(null, GLTFModel4)}>My Custom Glasses</VTOButton> */}
           </div>
         </div>
 

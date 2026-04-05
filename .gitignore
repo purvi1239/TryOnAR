@@ -56,3 +56,4 @@ node_modules/.vite/
 .Trashes
 $RECYCLE.BIN/
 
+.vercel

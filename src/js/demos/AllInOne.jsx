@@ -62,10 +62,21 @@ const VTOModelContainer = (props) => {
     }
 
     mirrorHelper.set_faceFollower(threeObject3DParent, threeObject3D, props.faceIndex)
-  }, [props.GLTFModel, props.sizing, props.hatConfig])
+  }, [props.GLTFModel, props.sizing, props.hatConfig, props.glassesConfig])
 
   // Get main model
   const model = props.GLTFModel.scene.clone()
+
+  // For glasses, adjust scale and position if needed
+  if (props.isGlasses && props.glassesConfig) {
+    const scale = props.glassesConfig.scale || 1.0
+    model.scale.set(scale, scale, scale)
+    model.position.set(
+      props.glassesConfig.xOffset || 0,
+      props.glassesConfig.yOffset || 0,
+      props.glassesConfig.zOffset || 0
+    )
+  }
 
   // For hats, adjust position manually relative to head/forehead area
   if (!props.isGlasses && props.hatConfig) {
@@ -119,13 +130,29 @@ function AllInOne() {
   const [uploadedGlassesModels, setUploadedGlassesModels] = useState([])
   const [uploadedHatModels, setUploadedHatModels] = useState([])
   const [isUploading, setIsUploading] = useState(false)
+  const [glassesScale, setGlassesScale] = useState(1.0) // Scale for glasses
+  const [glassesXOffset, setGlassesXOffset] = useState(0) // X position
+  const [glassesYOffset, setGlassesYOffset] = useState(0) // Y position
+  const [glassesZOffset, setGlassesZOffset] = useState(0) // Z position
+  const [hatScale, setHatScale] = useState(1.05) // Scale for hats
+  const [hatXOffset, setHatXOffset] = useState(0) // X position
+  const [hatYOffset, setHatYOffset] = useState(0) // Y position adjustment from default 210
+  const [hatZOffset, setHatZOffset] = useState(0) // Z position
+
+  // Fixed glasses configuration
+  const glassesConfig = {
+    scale: glassesScale,
+    xOffset: glassesXOffset,
+    yOffset: glassesYOffset,
+    zOffset: glassesZOffset
+  }
 
   // Fixed hat positioning configuration with actual working values
   const hatConfig = {
-    yOffset: 210,    // Fixed Y-axis position (actual working value)
-    xOffset: 0,      // X-axis position (horizontal - left to right)
-    zOffset: 0,      // Z-axis position (depth - forward/backward)
-    scale: 1.05      // Fixed scale factor (actual working value: 1.05x)
+    yOffset: 210 + hatYOffset,    // Fixed Y-axis position (actual working value)
+    xOffset: hatXOffset,      // X-axis position (horizontal - left to right)
+    zOffset: hatZOffset,      // Z-axis position (depth - forward/backward)
+    scale: hatScale      // Adjustable scale factor
   }
 
   // settings:
@@ -388,6 +415,7 @@ function AllInOne() {
                 faceIndex={0}
                 isGlasses={currentType === 'glasses'}
                 glassesBranches={_settings.glassesBranches}
+                glassesConfig={glassesConfig}
                 hatConfig={hatConfig} />
             </Suspense>
           )}
@@ -437,7 +465,73 @@ function AllInOne() {
                 📁 {uploadedModel.name}
               </VTOButton>
             ))}
+          </div>
+
+          {/* Glasses Scale Adjustment */}
+          <div style={{ marginTop: '15px', padding: '10px', background: 'rgba(200, 200, 255, 0.2)', borderRadius: '8px' }}>
+            <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '8px', color: '#333' }}>
+              Size: {glassesScale.toFixed(2)}x
+            </label>
+            <input
+              type="range"
+              min="0.05"
+              max="20.0"
+              step="0.05"
+              value={glassesScale}
+              onChange={(e) => setGlassesScale(parseFloat(e.target.value))}
+              style={{
+                width: '100%',
+                cursor: 'pointer'
+              }}
+            />
+            <div style={{ fontSize: '0.8rem', color: '#666', marginTop: '5px' }}>
+              Adjust if glasses appear too small or large
+            </div>
+          </div>
+
+          {/* Glasses Position Adjustment */}
+          <div style={{ marginTop: '10px', padding: '10px', background: 'rgba(200, 200, 255, 0.15)', borderRadius: '8px' }}>
+            <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '5px', color: '#333' }}>
+              ↔ Left/Right: {glassesXOffset.toFixed(1)}
+            </label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={glassesXOffset}
+              onChange={(e) => setGlassesXOffset(parseFloat(e.target.value))}
+              style={{ width: '100%', cursor: 'pointer' }}
+            />
             
+            <label style={{ display: 'block', fontSize: '0.85rem', marginTop: '8px', marginBottom: '5px', color: '#333' }}>
+              ↕ Up/Down: {glassesYOffset.toFixed(1)}
+            </label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={glassesYOffset}
+              onChange={(e) => setGlassesYOffset(parseFloat(e.target.value))}
+              style={{ width: '100%', cursor: 'pointer' }}
+            />
+            
+            <label style={{ display: 'block', fontSize: '0.85rem', marginTop: '8px', marginBottom: '5px', color: '#333' }}>
+              ↗ Forward/Back: {glassesZOffset.toFixed(1)}
+            </label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={glassesZOffset}
+              onChange={(e) => setGlassesZOffset(parseFloat(e.target.value))}
+              style={{ width: '100%', cursor: 'pointer' }}
+            />
+          </div>
+
+          <div style={{ marginTop: '15px' }}>
             {/* Upload Button */}
             <div style={{ position: 'relative' }}>
               <input
@@ -491,8 +585,73 @@ function AllInOne() {
                 📁 {uploadedModel.name}
               </VTOButton>
             ))}
+          </div>
 
+          {/* Hat Scale Adjustment */}
+          <div style={{ marginTop: '15px', padding: '10px', background: 'rgba(200, 200, 255, 0.2)', borderRadius: '8px' }}>
+            <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '8px', color: '#333' }}>
+              Size: {hatScale.toFixed(2)}x
+            </label>
+            <input
+              type="range"
+              min="0.05"
+              max="20.0"
+              step="0.05"
+              value={hatScale}
+              onChange={(e) => setHatScale(parseFloat(e.target.value))}
+              style={{
+                width: '100%',
+                cursor: 'pointer'
+              }}
+            />
+            <div style={{ fontSize: '0.8rem', color: '#666', marginTop: '5px' }}>
+              Adjust if hat appears too small or large
+            </div>
+          </div>
 
+          {/* Hat Position Adjustment */}
+          <div style={{ marginTop: '10px', padding: '10px', background: 'rgba(200, 200, 255, 0.15)', borderRadius: '8px' }}>
+            <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '5px', color: '#333' }}>
+              ↔ Left/Right: {hatXOffset.toFixed(1)}
+            </label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={hatXOffset}
+              onChange={(e) => setHatXOffset(parseFloat(e.target.value))}
+              style={{ width: '100%', cursor: 'pointer' }}
+            />
+            
+            <label style={{ display: 'block', fontSize: '0.85rem', marginTop: '8px', marginBottom: '5px', color: '#333' }}>
+              ↕ Up/Down: {hatYOffset.toFixed(1)}
+            </label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={hatYOffset}
+              onChange={(e) => setHatYOffset(parseFloat(e.target.value))}
+              style={{ width: '100%', cursor: 'pointer' }}
+            />
+            
+            <label style={{ display: 'block', fontSize: '0.85rem', marginTop: '8px', marginBottom: '5px', color: '#333' }}>
+              ↗ Forward/Back: {hatZOffset.toFixed(1)}
+            </label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={hatZOffset}
+              onChange={(e) => setHatZOffset(parseFloat(e.target.value))}
+              style={{ width: '100%', cursor: 'pointer' }}
+            />
+          </div>
+
+          <div style={{ marginTop: '15px' }}>
             {/* Upload Button */}
             <div style={{ position: 'relative' }}>
               <input
